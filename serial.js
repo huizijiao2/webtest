@@ -59,7 +59,7 @@ var serial = {}
       .then(() => this.device_.claimInterface(0))
       .then(() => this.device_.selectAlternateInterface(0, 0))
       .then(() => {
-        let result = this.device_.controlTransferOut(openPort)
+        let result = this.device_.controlTransferIn(openPort)
         console.log('result', result)
         return result
       })
