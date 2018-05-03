@@ -1,5 +1,4 @@
 var serial = {}
-
 ;(function() {
   'use strict'
 
@@ -50,7 +49,6 @@ var serial = {}
       index: 0x00
     }
 
-    
     return this.device_
       .open()
       .then(() => {
@@ -60,9 +58,11 @@ var serial = {}
       })
       .then(() => this.device_.claimInterface(0))
       .then(() => this.device_.selectAlternateInterface(0, 0))
-      .then(() =>
-        this.device_.controlTransferOut(openPort)
-      )
+      .then(() => {
+        let result = this.device_.controlTransferOut(openPort)
+        console.log('result', result)
+        return result
+      })
       .then(() => {
         console.log('in')
         // readLoop()
