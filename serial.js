@@ -1,5 +1,5 @@
-var serial = {}
-;(function() {
+var serial = {};
+(function() {
   'use strict'
 
   serial.getPorts = function() {
