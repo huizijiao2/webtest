@@ -11,12 +11,13 @@ var serial = {};
 
   serial.requestPort = function() {
     const filters = [
-      { 'vendorId': 0x2341, 'productId': 0x8036 },
-      { 'vendorId': 0x2341, 'productId': 0x8037 },
-      { 'vendorId': 0x2341, 'productId': 0x804d },
-      { 'vendorId': 0x2341, 'productId': 0x804e },
-      { 'vendorId': 0x2341, 'productId': 0x804f },
-      { 'vendorId': 0x2341, 'productId': 0x8050 },
+      // { 'vendorId': 0x2341, 'productId': 0x8036 },
+      // { 'vendorId': 0x2341, 'productId': 0x8037 },
+      // { 'vendorId': 0x2341, 'productId': 0x804d },
+      // { 'vendorId': 0x2341, 'productId': 0x804e },
+      // { 'vendorId': 0x2341, 'productId': 0x804f },
+      // { 'vendorId': 0x2341, 'productId': 0x8050 },
+      { 'vendorId': 0x0483, 'productId': 0x5710 }
     ];
     return navigator.usb.requestDevice({ 'filters': filters }).then(
       device => new serial.Port(device)
@@ -43,14 +44,14 @@ var serial = {};
             return this.device_.selectConfiguration(1);
           }
         })
-        .then(() => this.device_.claimInterface(2))
-        .then(() => this.device_.selectAlternateInterface(2, 0))
+        .then(() => this.device_.claimInterface(0))
+        .then(() => this.device_.selectAlternateInterface(0, 0))
         .then(() => this.device_.controlTransferOut({
             'requestType': 'class',
             'recipient': 'interface',
             'request': 0x22,
             'value': 0x01,
-            'index': 0x02}))
+            'index': 0x00}))
         .then(() => {
           readLoop();
         });
@@ -62,7 +63,7 @@ var serial = {};
             'recipient': 'interface',
             'request': 0x22,
             'value': 0x00,
-            'index': 0x02})
+            'index': 0x00})
         .then(() => this.device_.close());
   };
 
