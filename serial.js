@@ -45,7 +45,7 @@ var serial = {}
       requestType: 'standard',
       recipient: 'device',
       request: 0x06,
-      value: 0x01,
+      value: 0100,
       index: 0x00
     }
 
