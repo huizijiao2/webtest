@@ -20,14 +20,6 @@ var serial = {}
       { vendorId: 0x0483, productId: 0x5710 }
     ]
 
-    const openPort = {
-      requestType: 'standard',
-      recipient: 'device',
-      request: 0x06,
-      value: 0x01,
-      index: 0x00
-    }
-
     return navigator.usb
       .requestDevice({ filters: filters })
       .then(device => new serial.Port(device))
@@ -50,6 +42,15 @@ var serial = {}
       )
     }
 
+    const openPort = {
+      requestType: 'standard',
+      recipient: 'device',
+      request: 0x06,
+      value: 0x01,
+      index: 0x00
+    }
+
+    
     return this.device_
       .open()
       .then(() => {
